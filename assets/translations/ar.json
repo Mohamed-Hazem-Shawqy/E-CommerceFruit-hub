@@ -31,5 +31,14 @@
     "accepTermsAndConditions": "يجب عليك الموافقه على الشروط والاحكام",
     "errorInNetwork": "تاكد من اتصالك باالشبكه ثم اعد المحاوله",
     "wrong_email_or_password": "البريد الإلكتروني أو كلمة المرور غير صحيحين.",
-    "signInSuccess": "نجح تسجيل الدخول"
+    "signInSuccess": "نجح تسجيل الدخول",
+    "goodmorning": "صباح الخير !..",
+    "searchFor": "ابحث عن.......",
+    "shopNow": "تسوق الان",
+    "bestSeller": "الاكثر مبيعا",
+    "more": "المزيد",
+    "home": "الصفحة الرئيسية",
+    "product": "المنتجات",
+    "cart": "السلة",
+    "profile": "الملف الشخصي"
 }

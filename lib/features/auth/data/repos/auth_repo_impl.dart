@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -5,6 +7,7 @@ import 'package:fruits_hub_app/core/errors/custom_exception.dart';
 import 'package:fruits_hub_app/core/errors/failuer.dart';
 import 'package:fruits_hub_app/core/services/data_base_service.dart';
 import 'package:fruits_hub_app/core/services/auth_service.dart';
+import 'package:fruits_hub_app/core/services/shared_pref_singleton.dart';
 import 'package:fruits_hub_app/core/utils/app_logger.dart';
 import 'package:fruits_hub_app/core/utils/end_points.dart';
 import 'package:fruits_hub_app/features/auth/data/models/user_model.dart';
@@ -60,6 +63,7 @@ class AuthRepoImpl implements AuthRepoDecl {
         password: password,
       );
       final userEntity = await getUser(user.uid);
+      await saveUserData(userEntity);
       return right(userEntity);
     } on CustomException catch (e) {
       return left(ServerFailuer(e.toString()));
@@ -124,7 +128,7 @@ class AuthRepoImpl implements AuthRepoDecl {
   Future<dynamic> addUser(UserEntity user) async {
     await dataBaseService.addData(
       path: EndPoints.userEndPoint,
-      data: user.toJson(),
+      data: UserModel.fromUserEntity(user).toJson(),
       id: user.uId,
     );
   }
@@ -136,5 +140,11 @@ class AuthRepoImpl implements AuthRepoDecl {
       id: uid,
     );
     return UserModel.fromJson(data);
+  }
+  
+  @override
+  Future<dynamic> saveUserData(UserEntity user) {
+    var jsonData=jsonEncode(UserModel.fromUserEntity(user).toJson());
+    return SharedPrefSingleton.setString(EndPoints.userData, jsonData);
   }
 }

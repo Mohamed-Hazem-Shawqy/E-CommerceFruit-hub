@@ -50,7 +50,7 @@ class CustomPageViewItem extends StatelessWidget {
                     padding: const EdgeInsets.all(10.0),
                     child: InkWell(
                       onTap: () {
-                        SharedPrefSingleton.setInstance(
+                        SharedPrefSingleton.setBool(
                           kIsOnBoardingSeenBefore,
                           true,
                         );

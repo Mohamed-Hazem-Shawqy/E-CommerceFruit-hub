@@ -3,7 +3,5 @@
   final String email;
   final String uId;
   UserEntity({required this.name, required this.email, required this.uId});
-  toJson() {
-    return {'name': name, 'email': email, 'uid': uId};
-  }
+  
 }

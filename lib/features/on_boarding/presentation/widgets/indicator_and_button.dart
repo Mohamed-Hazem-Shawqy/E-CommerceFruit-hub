@@ -34,7 +34,7 @@ class IndicatorAndButton extends StatelessWidget {
             child: CustomButton(
               text: tr('startnow'),
               onPressed: () {
-                SharedPrefSingleton.setInstance(kIsOnBoardingSeenBefore, true);
+                SharedPrefSingleton.setBool(kIsOnBoardingSeenBefore, true);
 
                 Navigator.pushReplacementNamed(
                   context,

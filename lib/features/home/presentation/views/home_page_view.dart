@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fruits_hub_app/features/home/presentation/widgets/home_page_view_body.dart';
+import 'package:fruits_hub_app/core/widgets/persistent_bottom_nav_bar.dart';
 
 class HomePageView extends StatelessWidget {
   const HomePageView({super.key});
@@ -7,6 +7,9 @@ class HomePageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(), body: HomePageViewBody());
+     return const PersistentBottomNavBarWidget();
+    
+    
+    
   }
 }

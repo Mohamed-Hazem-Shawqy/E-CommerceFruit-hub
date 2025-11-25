@@ -6,19 +6,31 @@ abstract class AppTextStyle {
     fontWeight: FontWeight.w400,
     fontSize: 12,
   );
+  static const TextStyle regular13 = TextStyle(
+    fontWeight: FontWeight.w400,
+    fontSize: 13,
+  );
   static const TextStyle bold23 = TextStyle(
     fontWeight: FontWeight.bold,
     fontSize: 23,
   );
   static const TextStyle semiBold16 = TextStyle(
-    fontWeight: FontWeight.bold,
+    fontWeight: FontWeight.w600,
     fontSize: 16,
+  );
+  static const TextStyle semiBold13 = TextStyle(
+    fontWeight: FontWeight.w600,
+    fontSize: 13,
   );
 
   // Heading5 Bold (size 20 as example)
   static const TextStyle bold20 = TextStyle(
     fontWeight: FontWeight.bold,
     fontSize: 20,
+  );
+  static const TextStyle bold19 = TextStyle(
+    fontWeight: FontWeight.bold,
+    fontSize: 19,
   );
 
   // Body Small Semibold (size 14 as example)
@@ -31,6 +43,10 @@ abstract class AppTextStyle {
   static const TextStyle bold16 = TextStyle(
     fontWeight: FontWeight.bold,
     fontSize: 16,
+  );
+  static const TextStyle bold13 = TextStyle(
+    fontWeight: FontWeight.bold,
+    fontSize: 13,
   );
 
   // Poppins Medium (size 15 as example)
@@ -56,11 +72,19 @@ abstract class AppTextStyle {
     fontWeight: FontWeight.w400,
     fontSize: 14,
   );
+  static const TextStyle regular16 = TextStyle(
+    fontWeight: FontWeight.w400,
+    fontSize: 16,
+  );
 
   // Body X-Small Semibold (size 10 as example)
   static const TextStyle semiBold10 = TextStyle(
     fontWeight: FontWeight.w600,
     fontSize: 10,
+  );
+  static const TextStyle semiBold11 = TextStyle(
+    fontWeight: FontWeight.w600,
+    fontSize: 11,
   );
 
   // Cairo Bold (size 14 as example)

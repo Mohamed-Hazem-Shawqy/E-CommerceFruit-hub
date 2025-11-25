@@ -26,7 +26,7 @@ class _SplashViewState extends State<SplashView> {
   void navigateTime() {
     Future.delayed(const Duration(seconds: 3), () {
       final bool isOnBoardingSeenBefore =
-          SharedPrefSingleton.getInstance(kIsOnBoardingSeenBefore) ?? false;
+          SharedPrefSingleton.getBool(kIsOnBoardingSeenBefore) ?? false;
       if (!mounted) return;
       if (isOnBoardingSeenBefore) {
         if (FirebaseAuth.instance.currentUser != null) {

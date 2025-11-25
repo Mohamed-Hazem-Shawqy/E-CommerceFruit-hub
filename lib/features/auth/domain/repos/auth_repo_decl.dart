@@ -15,5 +15,6 @@ abstract class AuthRepoDecl {
   Future<Either<Failuer, UserEntity>> sigInWithGoogle();
   Future<Either<Failuer, UserEntity>> signInWithFacebook();
   Future addUser(UserEntity user);
+  Future saveUserData(UserEntity user);
   Future<UserEntity> getUser(String uid);
 }
