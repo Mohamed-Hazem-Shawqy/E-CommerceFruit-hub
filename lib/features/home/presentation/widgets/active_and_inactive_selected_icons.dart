@@ -35,6 +35,7 @@ class ActiveIcon extends StatelessWidget {
             Container(
               width: 30,
               height: 30,
+
               decoration: ShapeDecoration(
                 color: AppColor.appDarkGreenColor,
                 shape: OvalBorder(),
@@ -74,6 +75,9 @@ class NavBarItems extends StatelessWidget {
             image: bottomNavBarEntity.activeIcon,
             name: bottomNavBarEntity.name,
           )
-        : InActiveIcon(image: bottomNavBarEntity.inActiveIcon);
+        : Container(
+            color: Colors.transparent,
+            child: InActiveIcon(image: bottomNavBarEntity.inActiveIcon),
+          );
   }
 }

@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:fruits_hub_app/core/utils/app_color.dart';
 import 'package:fruits_hub_app/core/utils/app_text_style.dart';
@@ -23,10 +22,9 @@ class CustomButton extends StatelessWidget {
         ),
         onPressed: onPressed,
         child: Text(
-          text.tr(),
+          text,
           style: AppTextStyle.bold16.copyWith(color: Colors.white),
         ),
-        
       ),
     );
   }

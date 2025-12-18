@@ -15,7 +15,7 @@ import 'package:fruits_hub_app/features/auth/domain/entites/user_entity.dart';
 import 'package:fruits_hub_app/features/auth/domain/repos/auth_repo_decl.dart';
 
 class AuthRepoImpl implements AuthRepoDecl {
-  final FirebaseAuthService firebaseAuthService;
+  final AuthService firebaseAuthService;
   final DataBaseService dataBaseService;
 
   AuthRepoImpl({

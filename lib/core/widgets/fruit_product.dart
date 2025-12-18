@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fruits_hub_app/core/entities/product_entity.dart';
 import 'package:fruits_hub_app/core/utils/app_color.dart';
-import 'package:fruits_hub_app/core/utils/app_images.dart';
 import 'package:fruits_hub_app/core/utils/app_text_style.dart';
-import 'package:svg_flutter/svg.dart';
+import 'package:fruits_hub_app/features/cart/presentation/manager/cart_cubit/cart_cubit_cubit.dart';
 
 class FruitProduct extends StatelessWidget {
-  const FruitProduct({super.key});
-
+  const FruitProduct({super.key, required this.productEntity});
+  final ProductEntity productEntity;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,24 +24,31 @@ class FruitProduct extends StatelessWidget {
           Positioned.fill(
             child: Column(
               children: [
-                Padding(
-                  padding: EdgeInsetsGeometry.only(
-                    top: MediaQuery.heightOf(context) / 20,
-                  ),
-                  child: SvgPicture.asset(
-                    Assets.imagesOnBoardingImage2,
-                    width: 100,
-                  ),
+                const SizedBox(height: 30),
+                Expanded(
+                  child: productEntity.imageurl != null
+                      ? SizedBox(
+                          height: 150,
+                          width: 120,
+                          child: Image.network(
+                            productEntity.imageurl!,
+                            fit: BoxFit.fill,
+                          ),
+                        )
+                      : Container(color: Colors.grey, width: 100, height: 100),
                 ),
-                const Spacer(),
+                const SizedBox(height: 10),
                 ListTile(
-                  title: Text('اناناس', style: AppTextStyle.semiBold16),
+                  title: Text(
+                    productEntity.name,
+                    style: AppTextStyle.semiBold16,
+                  ),
                   subtitle: FittedBox(
                     child: Text.rich(
                       TextSpan(
                         children: [
                           TextSpan(
-                            text: '30جنية ',
+                            text: '${productEntity.price} جنيه ',
                             style: AppTextStyle.bold13.copyWith(
                               color: AppColor.appOrangeColor,
                             ),
@@ -68,10 +76,17 @@ class FruitProduct extends StatelessWidget {
                       textAlign: TextAlign.right,
                     ),
                   ),
-                  trailing: CircleAvatar(
-                    backgroundColor: AppColor.appDarkGreenColor,
-                    child: Icon(Icons.add, color: Colors.white),
-                  ),
+                  trailing: productEntity.imageurl != null
+                      ? GestureDetector(
+                        onTap: () {
+                          context.read<CartCubit>().addCartItem(productEntity);
+                        },
+                        child: CircleAvatar(
+                            backgroundColor: AppColor.appDarkGreenColor,
+                            child: Icon(Icons.add, color: Colors.white),
+                          ),
+                      )
+                      : CircleAvatar(),
                 ),
 
                 const SizedBox(height: 15),

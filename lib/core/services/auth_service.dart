@@ -5,7 +5,7 @@ import 'package:fruits_hub_app/core/errors/custom_exception.dart';
 import 'package:fruits_hub_app/core/utils/app_logger.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-abstract class FirebaseAuthService {
+abstract class AuthService {
   Future<User> createUserWithEmailAndPassword({
     required String emailAddress,
     required String password,
@@ -19,7 +19,7 @@ abstract class FirebaseAuthService {
   Future<void> deleteUser();
 }
 
-class AuthService extends FirebaseAuthService {
+class FirebaseAuthService extends AuthService {
   @override
   Future<User> createUserWithEmailAndPassword({
     required String emailAddress,

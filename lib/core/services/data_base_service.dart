@@ -6,9 +6,10 @@ abstract class DataBaseService {
     required Map<String, dynamic> data,
     required String? id,
   });
-  Future<Map<String, dynamic>> getData({
+  Future<dynamic> getData({
     required String path,
-    required String id,
+    String? id,
+    Map<String, dynamic>? query,
   });
   Future<bool> isUserRecord({required String path, required String id});
 }
@@ -29,12 +30,31 @@ class FireStoreService implements DataBaseService {
   }
 
   @override
-  Future<Map<String, dynamic>> getData({
+  Future<dynamic> getData({
     required String path,
-    required String id,
+    String? id,
+    Map<String, dynamic>? query,
   }) async {
-    var data = await firestore.collection(path).doc(id).get();
-    return data.data() as Map<String, dynamic>;
+    if (id != null) {
+      var data = await firestore.collection(path).doc(id).get();
+      return data.data();
+    } else {
+      Query<Map<String, dynamic>> data = firestore.collection(path);
+      if (query != null) {
+        if (query['orderBy'] != null) {
+          var orderBy = query['orderBy'];
+          var descending = query['descending'];
+          data = data.orderBy(orderBy, descending: descending);
+        }
+
+        if (query['limit'] != null) {
+          var limit = query['limit'];
+          data = data.limit(limit);
+        }
+      }
+      var result = await data.get();
+      return result.docs.map((e) => e.data()).toList();
+    }
   }
 
   @override

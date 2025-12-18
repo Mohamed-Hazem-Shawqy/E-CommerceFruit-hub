@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:fruits_hub_app/core/entities/product_entity.dart';
 import 'package:fruits_hub_app/core/widgets/fruit_product.dart';
 
-class BestSellerGridView extends StatelessWidget {
-  const BestSellerGridView({super.key, required this.products});
+class ProductsBody extends StatelessWidget {
+  const ProductsBody({super.key, required this.products});
   final List<ProductEntity> products;
+
   @override
   Widget build(BuildContext context) {
     return SliverGrid.builder(

@@ -75,7 +75,7 @@ class _SignUpViewPageBodyState extends State<SignUpViewPageBody> {
               const SizedBox(height: 30),
 
               CustomButton(
-                text: 'createNewAccount',
+                text: 'createNewAccount'.tr(),
                 onPressed: () {
                   if (formGlobalKey.currentState!.validate()) {
                     if (istermsAccepted) {

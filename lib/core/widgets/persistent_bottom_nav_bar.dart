@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fruits_hub_app/core/cubits/products_cubit/products_cubit.dart';
+import 'package:fruits_hub_app/core/repos/product_repo_decl.dart';
+import 'package:fruits_hub_app/core/services/get_it_service.dart';
+import 'package:fruits_hub_app/features/cart/presentation/views/cart_view.dart';
+import 'package:fruits_hub_app/features/home/presentation/views/products.dart';
 import 'package:fruits_hub_app/features/home/presentation/widgets/custom_bottom_nav_bar.dart';
 import 'package:fruits_hub_app/features/home/presentation/widgets/home_page_view_body.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
@@ -44,9 +50,23 @@ class _PersistentBottomNavBarWidgetState
         },
       ),
       screens: [
-        CustomNavBarScreen(screen: HomePageViewBody()),
-        CustomNavBarScreen(screen: Center(child: Text("Page 2"))),
-        CustomNavBarScreen(screen: Center(child: Text("Page 3"))),
+        CustomNavBarScreen(
+          screen: BlocProvider(
+            create: (context) =>
+                ProductsCubit(getit.get<ProductRepoDecl>())
+                  ..getBestSellingProducts(),
+            child: HomePageViewBody(),
+          ),
+        ),
+
+        CustomNavBarScreen(
+          screen: BlocProvider(
+            create: (context) =>
+                ProductsCubit(getit.get<ProductRepoDecl>())..getProducts(),
+            child: Products(),
+          ),
+        ),
+        CustomNavBarScreen(screen: const CartView()),
         CustomNavBarScreen(screen: Center(child: Text("Page 4"))),
       ],
 

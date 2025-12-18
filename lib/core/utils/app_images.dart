@@ -10,6 +10,10 @@ class Assets {
   /// assets/images/apple_icon.svg
   static const String imagesAppleIcon = "assets/images/apple_icon.svg";
 
+  /// Assets for imagesDoubleArrowFilter
+  /// assets/images/double_arrow_filter.svg
+  static const String imagesDoubleArrowFilter = "assets/images/double_arrow_filter.svg";
+
   /// Assets for imagesFaceIcon
   /// assets/images/face_icon.svg
   static const String imagesFaceIcon = "assets/images/face_icon.svg";
@@ -86,8 +90,16 @@ class Assets {
   /// assets/images/search.svg
   static const String imagesSearch = "assets/images/search.svg";
 
+  /// Assets for imagesSearchFilter
+  /// assets/images/search_filter.svg
+  static const String imagesSearchFilter = "assets/images/search_filter.svg";
+
   /// Assets for imagesSplash
   /// assets/images/splash.svg
   static const String imagesSplash = "assets/images/splash.svg";
+
+  /// Assets for imagesTrash
+  /// assets/images/trash.svg
+  static const String imagesTrash = "assets/images/trash.svg";
 }
 
