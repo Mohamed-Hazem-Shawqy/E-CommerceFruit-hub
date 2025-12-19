@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruits_hub_app/core/cubits/products_cubit/products_cubit.dart';
 import 'package:fruits_hub_app/core/repos/product_repo_decl.dart';
 import 'package:fruits_hub_app/core/services/get_it_service.dart';
-import 'package:fruits_hub_app/core/widgets/app_scaffold_messenger.dart';
 import 'package:fruits_hub_app/features/cart/presentation/manager/cart_cubit/cart_cubit_cubit.dart';
 import 'package:fruits_hub_app/features/cart/presentation/manager/cubit/cart_item_cubit.dart';
 import 'package:fruits_hub_app/features/cart/presentation/views/cart_view.dart';
@@ -41,6 +40,7 @@ class _PersistentBottomNavBarWidgetState
   @override
   Widget build(BuildContext context) {
     return PersistentTabView.custom(
+      backgroundColor: Colors.transparent,
       bottomScreenMargin: 0,
       navBarHeight: 65,
       context,
@@ -64,19 +64,32 @@ class _PersistentBottomNavBarWidgetState
               appBar: appBar(),
               body: BlocListener<CartCubit, CartCubitState>(
                 listener: (context, state) {
-                  print(
-                    "Current State: $state========================",
-                  ); // Check if this prints in console!
+                  // Check if this prints in console!
                   if (state is CartCubitAddedItem) {
-                    rootScaffoldMessengerKey.currentState?.showSnackBar(
-                      const SnackBar(
-                        content: Text('تم اضافه المنتج الى السله'),
-                        duration: Duration(seconds: 2),
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: const Text('تم اضافه المنتج الى السله'),
+                        behavior: SnackBarBehavior.floating,
+                        margin: const EdgeInsets.only(
+                          bottom: 60,
+                          left: 16,
+                          right: 16,
+                        ),
+                        duration: const Duration(seconds: 1),
                       ),
                     );
                   } else if (state is CartCubitRemoveItem) {
-                    rootScaffoldMessengerKey.currentState?.showSnackBar(
-                      const SnackBar(content: Text('تم حذف المنتج من السله')),
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('تم حذف المنتج من السله'),
+                        behavior: SnackBarBehavior.floating,
+                        margin: EdgeInsets.only(
+                          bottom: 60,
+                          left: 16,
+                          right: 16,
+                        ),
+                        duration: Duration(seconds: 1),
+                      ),
                     );
                   }
                 },

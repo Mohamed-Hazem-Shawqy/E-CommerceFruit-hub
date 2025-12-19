@@ -6,7 +6,6 @@ import 'package:fruits_hub_app/core/helper_func/on_generate_routes.dart';
 import 'package:fruits_hub_app/core/services/bloc_observer.dart';
 import 'package:fruits_hub_app/core/services/get_it_service.dart';
 import 'package:fruits_hub_app/core/services/shared_pref_singleton.dart';
-import 'package:fruits_hub_app/core/widgets/app_scaffold_messenger.dart';
 import 'package:fruits_hub_app/features/splash/presentation/views/splash_view.dart';
 import 'package:fruits_hub_app/firebase_options.dart';
 
@@ -37,9 +36,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      scaffoldMessengerKey: rootScaffoldMessengerKey,
 
       theme: ThemeData(
+        
+        
         fontFamily: 'Cairo',
         scaffoldBackgroundColor: Colors.white,
         appBarTheme: AppBarTheme(backgroundColor: Colors.white),
