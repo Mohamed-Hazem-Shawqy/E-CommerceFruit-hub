@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruits_hub_app/core/widgets/custom_button.dart';
 import 'package:fruits_hub_app/features/cart/presentation/manager/cart_cubit/cart_cubit_cubit.dart';
+import 'package:fruits_hub_app/features/cart/presentation/manager/cubit/cart_item_cubit.dart';
 import 'package:fruits_hub_app/features/cart/presentation/widgets/cart_header.dart';
 import 'package:fruits_hub_app/features/cart/presentation/widgets/cart_item_list.dart';
 
@@ -29,7 +30,7 @@ class CartViewBody extends StatelessWidget {
           ),
         ),
 
-        context.read<CartCubit>().addItemEntity.cartEntityList.isNotEmpty
+        context.watch<CartCubit>().addItemEntity.cartEntityList.isNotEmpty
             ? const Divider()
             : const SizedBox(),
         Padding(
@@ -41,14 +42,27 @@ class CartViewBody extends StatelessWidget {
           ),
           child:
               context.read<CartCubit>().addItemEntity.cartEntityList.isNotEmpty
-              ? CustomButton(
-                  text:
-                      'الدفع ${context.watch<CartCubit>().addItemEntity.calculateAllTotalPrice()} جنيه',
-                  onPressed: () {},
-                )
+              ? CartBilingButton()
               : const SizedBox(),
         ),
       ],
+    );
+  }
+}
+
+class CartBilingButton extends StatelessWidget {
+  const CartBilingButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<CartItemCubit, CartItemState>(
+      builder: (context, state) {
+        return CustomButton(
+          text:
+              'الدفع ${context.watch<CartCubit>().addItemEntity.calculateAllTotalPrice()} جنيه',
+          onPressed: () {},
+        );
+      },
     );
   }
 }

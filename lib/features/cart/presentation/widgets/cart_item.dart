@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruits_hub_app/core/utils/app_color.dart';
 import 'package:fruits_hub_app/core/utils/app_images.dart';
 import 'package:fruits_hub_app/core/utils/app_text_style.dart';
 import 'package:fruits_hub_app/features/cart/domain/entities/cart_entity.dart';
+import 'package:fruits_hub_app/features/cart/presentation/manager/cart_cubit/cart_cubit_cubit.dart';
+import 'package:fruits_hub_app/features/cart/presentation/manager/cubit/cart_item_cubit.dart';
 import 'package:fruits_hub_app/features/cart/presentation/widgets/cart_item_amont_buttons.dart';
 import 'package:svg_flutter/svg_flutter.dart';
 
@@ -39,21 +42,40 @@ class CartItem extends StatelessWidget {
                     style: AppTextStyle.bold13,
                   ),
                   const Spacer(),
-                  SvgPicture.asset(Assets.imagesTrash),
+                  GestureDetector(
+                    onTap: () {
+                      context.read<CartCubit>().deleteCartItem(cartEntity);
+                    },
+                    child: SvgPicture.asset(Assets.imagesTrash),
+                  ),
                 ],
               ),
-              Text(
-                '${cartEntity.count} كم',
-                style: AppTextStyle.regular13.copyWith(
-                  color: AppColor.appLightOrangeColor,
-                ),
-              ),
+              KgmAmountTextBuilder(cartEntity: cartEntity),
+
               const SizedBox(height: 6),
               Row(children: [CartItemAmontButtons(cartEntity: cartEntity)]),
             ],
           ),
         ),
       ],
+    );
+  }
+}
+
+class KgmAmountTextBuilder extends StatelessWidget {
+  const KgmAmountTextBuilder({super.key, required this.cartEntity});
+  final CartEntity cartEntity;
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<CartItemCubit, CartItemState>(
+      builder: (context, state) {
+        return Text(
+          '${cartEntity.count} كم',
+          style: AppTextStyle.regular13.copyWith(
+            color: AppColor.appLightOrangeColor,
+          ),
+        );
+      },
     );
   }
 }

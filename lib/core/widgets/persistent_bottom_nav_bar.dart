@@ -3,11 +3,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruits_hub_app/core/cubits/products_cubit/products_cubit.dart';
 import 'package:fruits_hub_app/core/repos/product_repo_decl.dart';
 import 'package:fruits_hub_app/core/services/get_it_service.dart';
+import 'package:fruits_hub_app/core/widgets/app_scaffold_messenger.dart';
+import 'package:fruits_hub_app/features/cart/presentation/manager/cart_cubit/cart_cubit_cubit.dart';
+import 'package:fruits_hub_app/features/cart/presentation/manager/cubit/cart_item_cubit.dart';
 import 'package:fruits_hub_app/features/cart/presentation/views/cart_view.dart';
 import 'package:fruits_hub_app/features/home/presentation/views/products.dart';
 import 'package:fruits_hub_app/features/home/presentation/widgets/custom_bottom_nav_bar.dart';
 import 'package:fruits_hub_app/features/home/presentation/widgets/home_page_view_body.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
+import 'package:fruits_hub_app/features/home/presentation/widgets/custom_app_bar.dart';
 
 class PersistentBottomNavBarWidget extends StatefulWidget {
   const PersistentBottomNavBarWidget({super.key});
@@ -50,12 +54,35 @@ class _PersistentBottomNavBarWidgetState
         },
       ),
       screens: [
+        // شاشة Home
         CustomNavBarScreen(
           screen: BlocProvider(
             create: (context) =>
                 ProductsCubit(getit.get<ProductRepoDecl>())
                   ..getBestSellingProducts(),
-            child: HomePageViewBody(),
+            child: Scaffold(
+              appBar: appBar(),
+              body: BlocListener<CartCubit, CartCubitState>(
+                listener: (context, state) {
+                  print(
+                    "Current State: $state========================",
+                  ); // Check if this prints in console!
+                  if (state is CartCubitAddedItem) {
+                    rootScaffoldMessengerKey.currentState?.showSnackBar(
+                      const SnackBar(
+                        content: Text('تم اضافه المنتج الى السله'),
+                        duration: Duration(seconds: 2),
+                      ),
+                    );
+                  } else if (state is CartCubitRemoveItem) {
+                    rootScaffoldMessengerKey.currentState?.showSnackBar(
+                      const SnackBar(content: Text('تم حذف المنتج من السله')),
+                    );
+                  }
+                },
+                child: HomePageViewBody(),
+              ),
+            ),
           ),
         ),
 
@@ -66,7 +93,12 @@ class _PersistentBottomNavBarWidgetState
             child: Products(),
           ),
         ),
-        CustomNavBarScreen(screen: const CartView()),
+        CustomNavBarScreen(
+          screen: BlocProvider(
+            create: (context) => CartItemCubit(),
+            child: const CartView(),
+          ),
+        ),
         CustomNavBarScreen(screen: Center(child: Text("Page 4"))),
       ],
 
