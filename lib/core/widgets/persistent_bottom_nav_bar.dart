@@ -9,6 +9,7 @@ import 'package:fruits_hub_app/features/cart/presentation/views/cart_view.dart';
 import 'package:fruits_hub_app/features/home/presentation/views/products.dart';
 import 'package:fruits_hub_app/features/home/presentation/widgets/custom_bottom_nav_bar.dart';
 import 'package:fruits_hub_app/features/home/presentation/widgets/home_page_view_body.dart';
+import 'package:fruits_hub_app/features/profile/presentation/view/profile_view.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import 'package:fruits_hub_app/features/home/presentation/widgets/custom_app_bar.dart';
 
@@ -54,7 +55,7 @@ class _PersistentBottomNavBarWidgetState
         },
       ),
       screens: [
-        // شاشة Home
+        
         CustomNavBarScreen(
           screen: BlocProvider(
             create: (context) =>
@@ -112,7 +113,7 @@ class _PersistentBottomNavBarWidgetState
             child: const CartView(),
           ),
         ),
-        CustomNavBarScreen(screen: Center(child: Text("Page 4"))),
+        CustomNavBarScreen(screen: Center(child: const ProfileView())),
       ],
 
       itemCount: 4,
