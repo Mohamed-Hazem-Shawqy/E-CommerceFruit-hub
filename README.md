@@ -2,7 +2,7 @@
 [![Ask DeepWiki](https://devin.ai/assets/askdeepwiki.png)](https://deepwiki.com/Mohamed-Hazem-Shawqy/E-CommerceFruit-hub)
 
 Fruit Hub is a complete e-commerce mobile application developed with Flutter. It provides a seamless shopping experience for users to browse, search, and purchase fresh fruits. The application is built with a focus on clean architecture and robust state management, utilizing Firebase for backend services.
-
+![image alt](https://github.com/Mohamed-Hazem-Shawqy/E-CommerceFruit-hub/blob/ebc2cdf1a909d3b5328633384814305b16095529/fruit_hub_images.png)
 ## Features
 
 - **User Authentication**: Secure sign-up and sign-in using email/password, Google, and Facebook.
